@@ -95,6 +95,8 @@ app.configure(function() {
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser());
+    if(config.basicAuth)
+              app.use(express.basicAuth(config.basicAuth.username, config.basicAuth.password));
     app.use(express.session({
         secret: config.sessionSecret,
         store:  new RedisStore({
